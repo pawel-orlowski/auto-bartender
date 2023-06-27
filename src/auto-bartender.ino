@@ -5,9 +5,9 @@
 #include <Wire.h>
 #include <LiquidCrystal.h>
 
-const byte ROWS = 4;  // Liczba wierszy w klawiaturze
-const byte COLS = 4;  // Liczba kolumn w klawiaturze
-const int ONEML_DELAY = 250; //ms
+const byte ROWS = 4;  // Number of lines in the keyboard
+const byte COLS = 4;  // Number of columns in the keyboard
+const int ONEML_DELAY = 250; // Dose duration (milliseconds)
 const char CONFIRM_KEY = '#';
 const char START_KEY = '*';
 
@@ -18,10 +18,10 @@ char hexaKeys[ROWS][COLS] = {
   {'*', '0', '#', 'D'}  
 };
 
-byte rowPins[ROWS] = {6, 7, 8, 9}; // Piny wierszy klawiatury podłączone do pinów 6, 7, 8, 9 na Arduino
-byte colPins[COLS] = {13, 12, 11, 10}; // Piny kolumn klawiatury podłączone do pinów 13, 12, 11, 10 na Arduino
+byte rowPins[ROWS] = {6, 7, 8, 9}; // Keyboard row pins connected to 6, 7, 8, 9 pins in Arduino
+byte colPins[COLS] = {13, 12, 11, 10}; // Keyboard column pins connected to 13, 12, 11, 10 pins in Arduino
 
-int vodkaPumpState = HIGH;  //Zapisanie stanów pompek w trybie serwisowym
+int vodkaPumpState = HIGH;  // Saving pump states in service mode
 int blueCuracaoPumpState = HIGH;
 int orangeJuicePumpState = HIGH;
 int pomegranateJuicePumpState = HIGH;
@@ -30,11 +30,11 @@ int whiteRumPumpState = HIGH;
 int grapefruitJuicePumpState = HIGH;
 int spritePumpState = HIGH;
 
-// Inicjalizacja obiektu do obsługi klawiatury
+// Initialization of the keyboard
 Keypad klawiatura = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS);
 
 
-//Piny odpowiednich pompek
+//Pumps pins
 const int vodkaPump = 30;
 const int blueCuracaoPump = 31;
 const int orangeJuicePump = 32;
@@ -46,7 +46,7 @@ const int spritePump = 25;
 
 LiquidCrystal lcd(42, 44, 52, 50, 48, 46);
 
-boolean serviceMode = false; // Flaga trybu serwisowego
+boolean serviceMode = false; // Service mode flag
 
 void setup() {
     
@@ -55,11 +55,11 @@ void setup() {
   lcd.setCursor(0, 0);
   lcd.print("    Drinomat6000");
   lcd.setCursor(0, 2);
-  lcd.print("Aby wybrac kliknij *");
+  lcd.print("Aby wybrac kliknij *"); // eng:"To choose click *"
 
  Serial.begin(9600);
   
-// Deklracja stanu pinów wyjściowych
+// Statement of output pins
 
   digitalWrite(30, HIGH);
   digitalWrite(31, HIGH);
@@ -85,11 +85,11 @@ void loop() {
 
   char customKey = klawiatura.getKey();
 
-//Działanie trybów domyślnego i serwisowego
+// Operation of default and service modes
     if (customKey == 'A')
     {
-      serviceMode = !serviceMode;  //Zmiania trybów po wciśnięciu przycisku 'A'
-      if (serviceMode) //Zmiana na tryb serwisowy
+      serviceMode = !serviceMode;  //Change modes when the 'A' button is pressed
+      if (serviceMode) //Change to service mode
       {
 
       lcd.clear();
@@ -101,7 +101,7 @@ void loop() {
       lcd.print("uruchomi dana pompke"); 
 
       }
-      else  //Powrót do trybu domyślnego
+      else  //Return to default mode
       {
       lcd.clear ();
       lcd.setCursor(0, 0);
@@ -111,24 +111,24 @@ void loop() {
       }
     }
 
- // Obsługa trybu serwisowego
+ // Service mode operations
     if (serviceMode) {
     
-      //Załączanie pompki 1 w trybie serwisowym
+      // Activation of pump 1 in service mode
       if (customKey == '1') 
       {
         if (vodkaPumpState == HIGH)
         {
-        digitalWrite(30, LOW); // Ustawienie stanu pinu 30 na niski
-        vodkaPumpState = LOW; // Zapisanie aktualnego stanu pinu 30
+        digitalWrite(30, LOW); // Set pin 30 low
+        vodkaPumpState = LOW; // Saving the current state of pump 1
         } 
         else
         {
-        digitalWrite(30, HIGH); // Ustawienie stanu pinu 30 na wysoki
-        vodkaPumpState = HIGH; // Zapisanie aktualnego stanu pinu 30
+        digitalWrite(30, HIGH); // Set pin 30 high
+        vodkaPumpState = HIGH; // Saving the current state of pump 1
         }
        }
-             //Załączanie pompki 2 w trybie serwisowym
+            // Activation of pump 2 in service mode
       if (customKey == '2') 
       {
         if (blueCuracaoPumpState == HIGH)
@@ -142,7 +142,7 @@ void loop() {
         blueCuracaoPumpState = HIGH;
         }
        }
-           //Załączanie pompki 3 w trybie serwisowym
+           // Activation of pump 3 in service mode
       if (customKey == '3') 
       {
         if (orangeJuicePumpState == HIGH)
@@ -156,7 +156,7 @@ void loop() {
         orangeJuicePumpState = HIGH;
         }
        }
-             //Załączanie pompki 4 w trybie serwisowym
+             // Activation of pump 4 in service mode
       if (customKey == '4') 
       {
         if (pomegranateJuicePumpState == HIGH)
@@ -170,7 +170,7 @@ void loop() {
         pomegranateJuicePumpState = HIGH;
         }
        }
-             //Załączanie pompki 5 w trybie serwisowym
+             // Activation of pump 5 in service mode
       if (customKey == '5') 
       {
         if (lemonJuicePumpState == HIGH)
@@ -184,7 +184,7 @@ void loop() {
         lemonJuicePumpState = HIGH;
         }
        }
-             //Załączanie pompki 6 w trybie serwisowym
+             // Activation of pump 6 in service mode
       if (customKey == '6') 
       {
         if (whiteRumPumpState == HIGH)
@@ -198,7 +198,7 @@ void loop() {
         whiteRumPumpState = HIGH;
         }
        }
-             //Załączanie pompki 7 w trybie serwisowym
+             // Activation of pump 7 in service mode
       if (customKey == '7') 
       {
         if (grapefruitJuicePumpState == HIGH)
@@ -212,7 +212,7 @@ void loop() {
         grapefruitJuicePumpState = HIGH;
         }
        }
-             //Załączanie pompki 8 w trybie serwisowym
+             // Activation of pump 8 in service mode
       if (customKey == '8') 
       {
         if (spritePumpState == HIGH)
@@ -228,7 +228,7 @@ void loop() {
        }     
      }
     else {
-      // Obsługa trybu domyślnego
+      // Default mode opertions
       if (customKey && customKey == START_KEY){
         lcd.clear ();
         Serial.println(customKey);
@@ -243,7 +243,7 @@ void loop() {
           programKey =  klawiatura.getKey();
 
           lcd.setCursor(0, 0);
-          lcd.print("   Wybierz drink:   ");
+          lcd.print("   Wybierz drink:   ");    // eng: "Choose a drink:"
           lcd.setCursor(0, 1);
           lcd.print("        " + selectedDrink + "          ");
           lcd.setCursor(0, 2);
@@ -261,7 +261,7 @@ void loop() {
           }
         }
         
-        Serial.println("Wybrany kod");
+        Serial.println("Wybrany kod");    // eng: "Chosen code"
         Serial.println(selectedDrink);
 
         pourDrink(selectedDrink);
@@ -300,7 +300,7 @@ void pourDrink(String selectedDrink)
     lcd.setCursor(0, 0);
     lcd.print("      Kamikaze");
     lcd.setCursor(0, 2);
-    lcd.print("   Prosze czekac:");
+    lcd.print("   Prosze czekac:");   // eng: "Please wait:"
     pourKamikaze();
   }
   else if (selectedDrink.equals("21"))
@@ -352,7 +352,7 @@ void pourDrink(String selectedDrink)
   {
     lcd.clear ();
     lcd.setCursor(0, 0);
-    lcd.print("  Pompka 1 - 40 ml  ");
+    lcd.print("  Pompka 1 - 40 ml  ");    // eng: "Pump 1 - 40 ml"
     lcd.setCursor(0, 2);
     lcd.print("   Prosze czekac:");
     pourPompka1();
@@ -425,10 +425,10 @@ void pourDrink(String selectedDrink)
   {
     lcd.clear ();
     lcd.setCursor(0, 0);
-    lcd.print("Wybierz jeszcze raz!");
+    lcd.print("Wybierz jeszcze raz!");    // eng: "Choose again!"
     delay (1000);
     lcd.setCursor(0, 2);
-    lcd.print("  Niepoprawny Kod!");
+    lcd.print("  Niepoprawny Kod!");    // eng: "Invalid Code!"
     delay (1000);
     lcd.setCursor(0, 2);
     lcd.print("                     ");
@@ -472,9 +472,9 @@ void pourKamikaze()
   stopPump(lemonJuicePump);
   lcd.clear ();
   lcd.setCursor(0, 0);
-  lcd.print("  Koniec nalewania");
+  lcd.print("  Koniec nalewania");    // eng: "End of pouring"
   lcd.setCursor(0, 2);
-  lcd.print("    Dziekujemy !");
+  lcd.print("    Dziekujemy !");    // eng: "Thank You !"
   delay(5000);
   lcd.clear();
   lcd.setCursor(0, 0);
@@ -630,7 +630,7 @@ void pourPrivateDancer()
 
 
 
-//Testowanie dokładności pojedyńczej pompki
+//Testing the accuracy of a single pump
 
 void pourPompka1()
 {
