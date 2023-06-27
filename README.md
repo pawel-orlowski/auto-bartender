@@ -9,7 +9,7 @@ The elementary components of the device are eight feeding lines that are complet
 * The output element is an aluminum connector (**5**), placed in the printed revolver for stable outflow of liquid (**4**);
 * All the above-mentioned elements are connected with a silicone hose with an internal diameter of *4 mm* (**2**).
 
-![Single feeding line](/docs/FeedingLine.png)
+![Single feeding line](/docs/feedingLine.png)
 
 The project includes several elements designed and made in 3D printing technology. One of the parts is the housing for the display and keyboard consisting of two elements - the top cover and the bottom cover. A revolver used in fluid supply lines and a tray with a drainer for collecting fluid residues were also made.
 
