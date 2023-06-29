@@ -53,7 +53,7 @@ void setup() {
   lcd.begin (20, 4);
   lcd.clear ();
   lcd.setCursor(0, 0);
-  lcd.print("    Drinomat6000");
+  lcd.print("    Drinomat6000");  // Device name
   lcd.setCursor(0, 2);
   lcd.print("Aby wybrac kliknij *"); // eng:"To choose click *"
 
@@ -94,11 +94,11 @@ void loop() {
 
       lcd.clear();
       lcd.setCursor(0, 0);
-      lcd.print("   Tryb serwisowy   ");
+      lcd.print("   Tryb serwisowy   ");  // eng: "Service mode"
       lcd.setCursor(0, 2);
-      lcd.print(" Przycisk od 1 do 8 ");
+      lcd.print(" Przycisk od 1 do 8 ");  // eng: "Button from 1 to 8"
       lcd.setCursor(0, 3);
-      lcd.print("uruchomi dana pompke"); 
+      lcd.print("uruchomi dana pompke");  // eng: "will start the pump"
 
       }
       else  //Return to default mode
