@@ -18,7 +18,7 @@ The project includes several elements designed and made in 3D printing technolog
 The machine controlled by a microcontroller is equipped with a simple interface consisting of a *4x20* liquid crystal display and a manual 16-button keyboard.
 ### **Electrical diagram**
 
-
+![Electrical diagram](/docs/Electrical_diagram.jpg)
 
 ## **Tests**
 Tests were carried out to determine the accuracy of liquid dispensing by the prototype of the automatic bartender. The test was carried out for 3 liquids with different physical properties that are used in this device: orange juice, vodka (40% vol.) and liqueur. In order to distinguish the most important features of these fluids, tests of density and kinematic viscosity were carried out for each of them. After identifying the properties of the tested substances, the accuracy of pouring eight pumps in the bartender was tested.
